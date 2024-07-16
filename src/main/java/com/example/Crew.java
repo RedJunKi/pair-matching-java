@@ -1,0 +1,42 @@
+package main.java.com.example;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+public class Crew {
+
+    private Course course;
+    private String name;
+    private Map<Map<Level, Mission>, Crew> pairList = new HashMap<>();
+
+    public Crew(Course course, String name) {
+        this.course = course;
+        this.name = name;
+    }
+
+    public Course getCourse() {
+        return course;
+    }
+
+    public void setCourse(Course course) {
+        this.course = course;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public Map<Map<Level, Mission>, Crew> getPairList() {
+        return pairList;
+    }
+
+    public void setPairList(Map<Map<Level, Mission>, Crew> pairList) {
+        this.pairList = pairList;
+    }
+}
