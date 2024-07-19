@@ -24,7 +24,7 @@ public class Crews {
 
     public static Crews getInstance() {
         if (instance == null) {
-            return new Crews();
+            instance = new Crews();
         }
 
         return instance;
@@ -43,5 +43,13 @@ public class Crews {
                 .filter(c -> c.getName().equals(name))
                 .findAny()
                 .orElseThrow();
+    }
+
+    @Override
+    public String toString() {
+        return crews.stream()
+                .map(Crew::toString)
+                .reduce((crew1, crew2) -> crew1 + " : " + crew2)
+                .orElse("");
     }
 }

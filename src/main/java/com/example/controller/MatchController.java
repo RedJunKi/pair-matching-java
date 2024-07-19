@@ -40,6 +40,10 @@ public class MatchController {
 
 
     private boolean isDuplicatePair(List<Pair> matchPair, List<Pair> findPairs) {
+        if (findPairs == null) {
+            return false;
+        }
+
         for (Pair pair : matchPair) {
             if (findPairs.contains(pair)) {
                 return true;

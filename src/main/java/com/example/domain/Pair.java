@@ -33,4 +33,12 @@ public class Pair {
     public int hashCode() {
         return Objects.hashCode(crews);
     }
+
+    @Override
+    public String toString() {
+        return crews.stream()
+                .map(Crew::toString)
+                .reduce((c1, c2) -> c1 + " : " + c2)
+                .orElse("");
+    }
 }

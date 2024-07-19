@@ -24,13 +24,32 @@ public class Main {
         crews.addCrews(backendList, "백엔드");
         crews.addCrews(frontendList, "프론트엔드");
 
-        MatchCondition level1_carRacing = new MatchCondition("백엔드", "레벨1", "자동차경주");
-        MatchCondition level1_lotto = new MatchCondition("백엔드", "레벨1", "로또");
+        MatchCondition level1_carRacing = new MatchCondition("프론트엔드", "레벨1", "자동차경주");
+        MatchCondition level1_lotto = new MatchCondition("프론트엔드", "레벨1", "로또");
+        MatchCondition level1_numberBaseball = new MatchCondition("프론트엔드", "레벨1", "로또");
         MatchRepository matchRepository = new MatchRepository();
         MatchController matchController = new MatchController(matchRepository);
-        matchController.match(level1_carRacing, backendList);
+        matchController.match(level1_carRacing, frontendList);
 
         List<Pair> pairByMatchCondition = matchRepository.findPairByMatchCondition(level1_carRacing);
-        pairByMatchCondition.stream().forEach(p -> p.getCrews().forEach(pc -> System.out.println(pc.getName())));
+        pairByMatchCondition.forEach(System.out::println);
+
+        matchController.match(level1_lotto, frontendList);
+        System.out.println("로또");
+        System.out.println();
+        System.out.println();
+        System.out.println();
+
+        pairByMatchCondition = matchRepository.findPairByMatchCondition(level1_lotto);
+        pairByMatchCondition.forEach(System.out::println);
+
+        matchController.match(level1_numberBaseball, frontendList);
+        System.out.println("숫자야구");
+        System.out.println();
+        System.out.println();
+        System.out.println();
+
+        pairByMatchCondition = matchRepository.findPairByMatchCondition(level1_numberBaseball);
+        pairByMatchCondition.forEach(System.out::println);
     }
 }
