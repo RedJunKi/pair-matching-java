@@ -1,4 +1,4 @@
-package main.java.com.example;
+package main.java.com.example.domain;
 
 public enum Course {
     BACKEND("백엔드"),

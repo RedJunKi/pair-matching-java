@@ -1,13 +1,13 @@
 package main.java.com.example;
 
+import main.java.com.example.controller.MatchController;
+import main.java.com.example.domain.Crew;
+import main.java.com.example.domain.Crews;
+import main.java.com.example.domain.MatchCondition;
+import main.java.com.example.domain.Pair;
+import main.java.com.example.repository.MatchRepository;
 import main.java.com.example.util.FileLoader;
-import main.java.com.example.util.Randoms;
 
-import java.io.BufferedReader;
-import java.io.FileInputStream;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.nio.charset.StandardCharsets;
 import java.util.List;
 
 public class Main {
@@ -20,9 +20,17 @@ public class Main {
 
         List<String> backendList = FileLoader.fileLoadToStringList(backendCrewPath);
         List<String> frontendList = FileLoader.fileLoadToStringList(frontendCrewPath);
+        Crews crews = Crews.getInstance();
+        crews.addCrews(backendList, "백엔드");
+        crews.addCrews(frontendList, "프론트엔드");
 
-        Crews crews = new Crews(backendList, frontendList);
+        MatchCondition level1_carRacing = new MatchCondition("백엔드", "레벨1", "자동차경주");
+        MatchCondition level1_lotto = new MatchCondition("백엔드", "레벨1", "로또");
+        MatchRepository matchRepository = new MatchRepository();
+        MatchController matchController = new MatchController(matchRepository);
+        matchController.match(level1_carRacing, backendList);
 
-
+        List<Pair> pairByMatchCondition = matchRepository.findPairByMatchCondition(level1_carRacing);
+        pairByMatchCondition.stream().forEach(p -> p.getCrews().forEach(pc -> System.out.println(pc.getName())));
     }
 }

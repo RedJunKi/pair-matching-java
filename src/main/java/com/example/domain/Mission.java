@@ -1,4 +1,4 @@
-package main.java.com.example;
+package main.java.com.example.domain;
 
 public enum Mission {
     CAR_RACING("자동차경주"),
@@ -15,5 +15,9 @@ public enum Mission {
 
     Mission(String name) {
         this.name = name;
+    }
+
+    public String getName() {
+        return name;
     }
 }

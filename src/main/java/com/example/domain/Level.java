@@ -1,4 +1,4 @@
-package main.java.com.example;
+package main.java.com.example.domain;
 
 public enum Level {
     LEVEL1("레벨1"),
