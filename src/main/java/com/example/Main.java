@@ -31,8 +31,6 @@ public class Main {
         MatchController matchController = new MatchController(matchRepository);
         matchController.match(level1_carRacing, frontendList);
 
-        List<Pair> pairByMatchCondition = matchRepository.findPairByMatchCondition(level1_carRacing);
-        pairByMatchCondition.forEach(System.out::println);
 
         matchController.match(level1_lotto, frontendList);
         System.out.println("로또");
@@ -40,8 +38,7 @@ public class Main {
         System.out.println();
         System.out.println();
 
-        pairByMatchCondition = matchRepository.findPairByMatchCondition(level1_lotto);
-        pairByMatchCondition.forEach(System.out::println);
+
 
         matchController.match(level1_numberBaseball, frontendList);
         System.out.println("숫자야구");
@@ -49,7 +46,10 @@ public class Main {
         System.out.println();
         System.out.println();
 
-        pairByMatchCondition = matchRepository.findPairByMatchCondition(level1_numberBaseball);
-        pairByMatchCondition.forEach(System.out::println);
+        matchController.match(level1_carRacing, frontendList);
+        System.out.println("자동차경주");
+        System.out.println();
+        System.out.println();
+        System.out.println();
     }
 }

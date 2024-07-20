@@ -14,6 +14,12 @@ public class Pair {
         return crews;
     }
 
+    public List<String> getCrewNames() {
+        return crews.stream().
+                map(Crew::getName)
+                .toList();
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) {

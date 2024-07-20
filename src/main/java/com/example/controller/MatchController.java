@@ -23,33 +23,16 @@ public class MatchController {
     public void match(MatchCondition matchCondition, List<String> crews) {
         int retryCount = 0;
         List<Pair> matchPair;
-        List<Pair> findPair;
 
         do {
             retryCount++;
             if (retryCount == MAX_RETRY_COUNT) {
                 throw new IllegalArgumentException();
             }
-
             matchPair = createMatchPair(crews);
-            findPair = matchRepository.findPairByMatchCondition(matchCondition);
-        } while (isDuplicatePair(matchPair, findPair));
+        } while (matchRepository.hasDuplicatingAtSameLevel(matchCondition, matchPair));
 
         matchRepository.save(matchCondition, matchPair);
-    }
-
-
-    private boolean isDuplicatePair(List<Pair> matchPair, List<Pair> findPairs) {
-        if (findPairs == null) {
-            return false;
-        }
-
-        for (Pair pair : matchPair) {
-            if (findPairs.contains(pair)) {
-                return true;
-            }
-        }
-        return false;
     }
 
     private List<Pair> createMatchPair(List<String> crews) {
