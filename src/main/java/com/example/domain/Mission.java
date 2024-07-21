@@ -1,23 +1,61 @@
 package main.java.com.example.domain;
 
-public enum Mission {
-    CAR_RACING("자동차경주"),
-    LOTTO("로또"),
-    NUMBER_BASEBALL("숫자야구게임"),
-    CART("장바구니"),
-    PAYMENT("결제"),
-    SUBWAY_MAP("지하철노선도"),
-    PERFORMANCE_IMPROVEMENT("성능개선"),
-    DISTRIBUTE("배포");
+import java.util.Objects;
 
+public class Mission {
 
-    private String name;
+    private final Level level;
+    private final String name;
 
-    Mission(String name) {
+    private Mission(Level level, String name) {
+        this.level = level;
         this.name = name;
+    }
+
+    public static Mission of(Level level, String missionName) {
+        return new Mission(level, missionName);
+    }
+
+    public Level getLevel() {
+        return level;
     }
 
     public String getName() {
         return name;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+
+        if (o == null || o.getClass() != getClass()) {
+            return false;
+        }
+
+        Mission mission = (Mission) o;
+        return level == mission.getLevel() && name.equals(mission.getName());
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(level, name);
+    }
+
+    @Override
+    public String toString() {
+        return "Mission{" +
+                "level=" + level +
+                ", name='" + name + '\'' +
+                "}";
+    }
+
+    public boolean isSameLevel(Level level) {
+        return this.level.equals(level);
+    }
+
+    public boolean isSameMission(String missionName) {
+        return this.name.equals(missionName);
     }
 }
